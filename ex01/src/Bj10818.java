@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Bj10818 {
 	public static void main(String[] args) {
+<<<<<<< HEAD
 	
 		Scanner sc = new Scanner(System.in);
 		
@@ -15,6 +16,20 @@ public class Bj10818 {
 		}
 		Arrays.sort(num);
 		System.out.println(num[0]+" " + num[N-1]);
+=======
+		
+		Scanner sc = new Scanner(System.in);
+		
+		int N = sc.nextInt();
+		int[] num= new int[N];
+		
+		for (int i = 0; i < num.length; i++) {
+			num[i] = sc.nextInt();
+		}
+		Arrays.sort(num);
+		System.out.println(num[0]+" "+num[N-1]);
+			
+>>>>>>> 989176502310805bc4d174479d3efdf2bb3545cd
 		
 	}
 }
