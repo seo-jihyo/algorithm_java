@@ -1,5 +1,8 @@
 import java.util.Scanner;
+<<<<<<< HEAD
 import java.util.Arrays;
+=======
+>>>>>>> 485b68a08a9a9493b8ff1df03f7958fa33b79920
 
 public class Bj10798 {
     
@@ -29,6 +32,10 @@ public class Bj10798 {
 			}
 		}
 	}
+<<<<<<< HEAD
 }
 
 	
+=======
+}
+>>>>>>> 485b68a08a9a9493b8ff1df03f7958fa33b79920
