@@ -20,7 +20,6 @@ public class Bj10815 {
 			} else {
 				System.out.print("0 ");
 			}
-
 		}
 	}
 }
