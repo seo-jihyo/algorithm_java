@@ -12,6 +12,5 @@ public class Bj27433 {
 			fac *= i;
 		}
 		System.out.println(fac);
-
 	}
 }
