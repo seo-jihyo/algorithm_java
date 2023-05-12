@@ -23,8 +23,6 @@ public class Boj15650 {
 		dfs(N,M,0);
 		System.out.println(sb);
 		
-
-
 	}
 	public static void dfs(int N, int M, int depth) {
 		if (depth == M) {
@@ -44,5 +42,4 @@ public class Boj15650 {
 			}
 		}
 	}
-
 }
