@@ -1,12 +1,13 @@
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Boj{
+public class Boj10828{
 
 	public static Stack<Integer> stack = new Stack<>();
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuffer sb = new StringBuffer();
 		int N = sc.nextInt();
 
