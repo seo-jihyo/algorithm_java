@@ -5,32 +5,39 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Boj {
-	public static void main(String[] args) throws IOException {
+public class Boj11866 {
+	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		StringBuilder sb = new StringBuilder();
+		
 		sb.append("<");
+		
 		int size = Integer.parseInt(st.nextToken());
 		int num = Integer.parseInt(st.nextToken());
 		
 		Queue<Integer> queue = new LinkedList<>();
-		for(int i =1; i <= size; i++) {
+		
+		for (int i = 1; i <= size; i++) {
 			queue.add(i);
 		}
 		int k = 1;
-		while(queue.size()>0) {
-			if(k%num == 0){
-			sb.append(queue.poll()+", ");
-			}
+		
+		while (queue.size() > 0) {
+			if (k % num == 0) {
+				sb.append(queue.poll()+", ");
+			}//if end
 			else {
-				queue.add(queue.poll());				
+				queue.add(queue.poll()); //요소 반환
 			}
 			k++;
-		}
-		sb.delete(sb.length()-2, sb.length());
+			
+		}//while end
+			sb.delete(sb.length() - 2 , sb.length());
 		sb.append(">");
 		System.out.println(sb);
-		
-	}
+	}//main end
 }
+
+
+
