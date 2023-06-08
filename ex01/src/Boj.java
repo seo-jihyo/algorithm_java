@@ -1,27 +1,31 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 public class Boj {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String str = br.readLine();
-        
-        int[] arr = new int[10];
-        for (int i = 0; i < str.length(); i++) {
-            int num = Character.getNumericValue(str.charAt(i));
-            if (num == 6) {
-                arr[9]++;
-            } else {
-                arr[num]++;
+        int totalScore = 0; // 총합 점수
+        int closestScore = 0; // 100에 가장 가까운 점수
+
+        for (int i = 0; i < 10; i++) {
+            int score = Integer.parseInt(br.readLine()); // 버섯의 점수를 입력받기
+
+            totalScore += score; // 총합 점수에 현재 버섯의 점수를 더함
+
+            if (totalScore >= 100) {
+                if (totalScore - 100 <= 100 - closestScore) {
+                    closestScore = totalScore; // 총합 점수가 100에 가까운 경우, closestScore 업데이트
+                } else {
+                    closestScore = totalScore - score; // 이전 점수가 100에 가까운 경우, closestScore 업데이트
+                }
+                break; // 결과를 찾았으므로 반복문 종료
             }
+            closestScore = totalScore; // 총합 점수가 100 미만인 경우, closestScore 업데이트
         }
-        int max = 0;
-        for (int i = 0; i < 9; i++) {
-            max = Math.max(max,arr[i]);
-        }
-        int nine = arr[9]/2;
-        if (arr[9]%2==1) nine++;
-        max = Math.max(max,nine);
-        System.out.print(max);
+
+        System.out.println(closestScore); // 가장 가까운 점수 출력
+
+        br.close(); // BufferedReader 닫기
     }
 }
