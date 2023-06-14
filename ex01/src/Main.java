@@ -1,40 +1,43 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.Stack;
 
 public class Main {
 
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int input_len, i;
+		Stack<Character> stack = new Stack<Character>();
+		char t;
 		
-		while(true) {
-			int n = scan.nextInt();
-			if(n == -1)
-				break;
+		String input = br.readLine();
+		while(!input.equals(".")) {
+			stack.clear();
 			
-			int[] arr = new int[n]; 	// 약수 담을 배열
-			int sum = 0;				// 약수들의 합
-			int index = 0;				// 약수 담을 배열의 인덱스
-			for(int i=1; i<n; i++) {
-				if(n%i == 0) {			// 약수일 때
-					arr[index++] = i;	// 약수 저장
-					sum += i;			// 약수 합
+			input_len = input.length();
+			for(i = 0; i < input_len; i++) {
+				t = input.charAt(i);
+				if(t == '(' || t == '[') {
+					stack.push(t);
+				}
+				else if(t == ')' || t == ']') {
+					if(stack.isEmpty() || (t == ')' && stack.peek() != '(') || (t == ']' && stack.peek() != '[')) {
+						stack.push(t);
+						break;
+					}
+					
+					stack.pop();
 				}
 			}
 			
-			if (sum != n) {
-				System.out.println(n + " is NOT perfect.");
-				continue;
+			if(stack.isEmpty()) {
+				System.out.println("yes");
 			}
-			System.out.println(n + "=");
-			for (int i = 0; i < index; i++) {
-				
-			if (i == index -1) {
-				System.out.print(arr[i]);
-			}else
-				System.out.print(arr[i] + "+");
+			else {
+				System.out.println("no");
 			}
-			System.out.println();
-		}
-			scan.close();
 			
+			input = br.readLine();
+		}
 	}
+
 }
