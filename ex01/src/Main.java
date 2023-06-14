@@ -1,43 +1,35 @@
-import java.io.*;
-import java.util.Stack;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int input_len, i;
-		Stack<Character> stack = new Stack<Character>();
-		char t;
-		
-		String input = br.readLine();
-		while(!input.equals(".")) {
-			stack.clear();
-			
-			input_len = input.length();
-			for(i = 0; i < input_len; i++) {
-				t = input.charAt(i);
-				if(t == '(' || t == '[') {
-					stack.push(t);
-				}
-				else if(t == ')' || t == ']') {
-					if(stack.isEmpty() || (t == ')' && stack.peek() != '(') || (t == ']' && stack.peek() != '[')) {
-						stack.push(t);
-						break;
-					}
-					
-					stack.pop();
-				}
-			}
-			
-			if(stack.isEmpty()) {
-				System.out.println("yes");
-			}
-			else {
-				System.out.println("no");
-			}
-			
-			input = br.readLine();
-		}
-	}
+	static int[] arr = new int[9];
+	static int sum = 0;
+	static int x = 0;
 
+	public static void main(String[] args) throws IOException {
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		for (int i = 0; i < 9; i++) {
+			arr[i] = Integer.parseInt(br.readLine());
+			sum += arr[i]; 
+		}
+		x = sum - 100; 	// 가짜 난쟁이 2명 합 
+		
+
+		for (int i = 0; i < arr.length; i++) { // 1 
+			for (int j = i+1; j < arr.length; j++) { // 2
+				if (x == arr[i] + arr[j]) { 
+					arr[i] = arr[j] = 0; 	//가짜 난쟁이 0으로 
+					Arrays.sort(arr); 
+					for (int k = 2; k < 9; k++) {
+						System.out.println(arr[k]);
+					} //for end
+					return;
+				}// if end
+			}
+		}
+	}//main end
 }
