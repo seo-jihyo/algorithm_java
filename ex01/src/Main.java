@@ -1,49 +1,46 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        
-        while (true) {
-            // 0 또는 공백으로 구분된 일련의 숫자들을 입력합니다.
-            String numbers = reader.readLine();
-    
-            // 결과를 저장하는 변수를 선언합니다.
-            StringBuilder result = new StringBuilder();
-    
-            // 입력값이 0 하나라면
-            if (numbers.equals("0")) {
-                // 반복문을 탈출하고 종료합니다.
-                break;
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int T = scanner.nextInt(); // 테스트 케이스의 개수
+
+        for (int test_case = 1; test_case <= T; test_case++) {
+            int N = scanner.nextInt(); // 선수의 수
+            int[] A = new int[N]; // 선수들의 실력을 저장할 배열
+
+            for (int i = 0; i < N; i++) {
+                A[i] = scanner.nextInt(); // 각 선수의 실력 입력받기
             }
-            // 입력값이 공백으로 구분된 일련의 숫자라면
-            else {
-                // 숫자들을 공백으로 구분해 배열로 저장하는 변수를 선언합니다.
-                String[] numberArray = numbers.split(" ");
-    
-                // 배열 변수에서 맨 앞에 있는 숫자는 N입니다.
-                // 0 <= N <= 25
-                int N = Integer.parseInt(numberArray[0]);
-                // 배열 변수에서 그 이후에 있는 숫자들은 방문자들이 제출한 값들입니다.
-                // 1부터 99 사이의 수입니다.
-    
-                // 일단 결과 변수에는 방문자들이 제출한 값 중 맨 앞에 있는 값과 공백을 넣어줍니다.
-                result.append(numberArray[1]).append(" ");
-    
-                // 방문자들이 제출한 숫자 중 두 번째부터 끝까지 반복해봅니다.
-                for (int index = 2; index <= N; index++) {
-                    // 배열 변수에서 현재 숫자가 바로 앞의 숫자와 똑같은 숫자가 아니라면
-                    if (!numberArray[index - 1].equals(numberArray[index])) {
-                        // 결과 변수에 현재 숫자와 공백을 넣어줍니다.
-                        result.append(numberArray[index]).append(" ");
-                    }
-                }
-    
-                // 출력 형식에 맞게 결과 변수의 값과 맨 뒤에 $를 같이 출력합니다.
-                System.out.println(result + "$");
+
+            long[] dp = new long[N]; // 최대 팀 실력 합을 저장할 배열
+            dp[0] = A[0]; // 첫 번째 선수의 실력
+
+            // 동적 프로그래밍을 이용하여 최대 팀 실력 합 계산
+            for (int i = 1; i < N; i++) {
+                dp[i] = Math.max(A[i], A[i] + dp[i - 1]);
             }
+
+            long maxSum = Long.MIN_VALUE; // 최대 팀 실력 합의 초기값은 매우 작은 값으로 설정
+
+            // dp 배열에서 최대값 찾기
+            for (int i = 0; i < N; i++) {
+                maxSum = Math.max(maxSum, dp[i]);
+            }
+
+            // 음수인 경우 절대값 취하기
+            maxSum = Math.abs(maxSum);
+
+            // 모든 팀 실력 합을 더한 후 1,000,000,007로 나눈 나머지 출력
+            long AnswerN = 0;
+            for (int i = 0; i < N; i++) {
+                AnswerN += Math.abs(dp[i]);
+                AnswerN %= 1000000007;
+            }
+
+            System.out.println("#" + test_case + " " + AnswerN);
         }
+
+        scanner.close();
     }
 }

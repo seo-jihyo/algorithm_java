@@ -41,8 +41,6 @@ public class Boj1668 {
 			}
 			countR++;
 		}
-
 		System.out.println(countL + " " + countR);
-
-	}
+	}// main end
 }
